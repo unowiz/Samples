@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ExportToSpreadsheet {
+namespace Karamem0.Samples.SharePoint.ExportToSpreadsheet {
 
     public partial class Export : LayoutsPageBase {
 

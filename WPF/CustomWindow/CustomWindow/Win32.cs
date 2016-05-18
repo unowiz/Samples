@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Karamem0.Samples.CustomWindow {
+namespace Karamem0.Samples.Wpf.CustomWindow {
 
     public static class Win32 {
 

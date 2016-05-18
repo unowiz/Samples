@@ -10,7 +10,7 @@ using Sgml;
 using System.IO;
 using System.Xml;
 
-namespace ExportToSpreadsheet {
+namespace Karamem0.Samples.SharePoint.ExportToSpreadsheet {
 
     public static class XLCellExtension {
 

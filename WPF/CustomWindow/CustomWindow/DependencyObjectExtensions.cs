@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Karamem0.Samples.CustomWindow {
+namespace Karamem0.Samples.Wpf.CustomWindow {
 
     public static class DependencyObjectExtensions {
 

@@ -7,7 +7,7 @@
     <ProjectGuid>{6FA92408-61AF-4DAC-823B-B143ECC20C0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExportToSpreadsheet</RootNamespace>
+    <RootNamespace>Karamem0.Samples.SharePoint.ExportToSpreadsheet</RootNamespace>
     <AssemblyName>ExportToSpreadsheet</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
@@ -67,7 +67,6 @@
     <Compile Include="Extensions\XLCellExtension.cs" />
     <Compile Include="Layouts\ExportToSpreadsheet\Export.aspx.cs">
       <DependentUpon>Export.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Layouts\ExportToSpreadsheet\Export.aspx.designer.cs">
       <DependentUpon>Export.aspx.cs</DependentUpon>

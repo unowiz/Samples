@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Karamem0.Samples.CustomWindow {
+namespace Karamem0.Samples.Wpf.CustomWindow {
 
     public partial class MainWindow : Window {
 
