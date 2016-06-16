@@ -49,6 +49,7 @@ namespace Karamem0.Samples.SharePoint.TimeRecorder {
                 Debug.WriteLine(await httpRes.Content.ReadAsStringAsync());
             }
         }
+
         private async void OnCheckOutTextBoxClick(object sender, RoutedEventArgs e) {
             var jsonContent = new JObject(
                 new JProperty("__metadata", new JObject(new JProperty("type", "SP.Data.TimeRecorderListItem"))),
