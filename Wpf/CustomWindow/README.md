@@ -1,3 +1,3 @@
-# CustomWindow
+﻿# CustomWindow
 
 WPF でのカスタム ウィンドウのサンプルです。
