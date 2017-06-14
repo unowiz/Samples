@@ -17,19 +17,19 @@ namespace Karamem0.Samples.SharePoint.ExcelServiceOnline {
 
     public static class Program {
 
-        private static readonly string TenantName = "<tenantname>";
+        private static readonly string TenantName = "<TenantName>";
 
-        private static readonly string ClientId = "<clientid>";
+        private static readonly string ClientId = "<ClientId>"
 
-        private static readonly string ResourceUri = "<resourceuri>";
+        private static readonly string ResourceUri = $"https://{TenantName}.sharepoint.com";
 
-        private static readonly string DeviceCodeUri = $"https://login.microsoftonline.com/{TenantName}/oauth2/devicecode";
+        private static readonly string DeviceCodeUri = $"https://login.microsoftonline.com/{TenantName}.onmicrosoft.com/oauth2/devicecode";
 
-        private static readonly string TokenUri = $"https://login.microsoftonline.com/{TenantName}/oauth2/token";
+        private static readonly string TokenUri = $"https://login.microsoftonline.com/{TenantName}.onmicrosoft.com/oauth2/token";
 
-        private static readonly string ExcelServiceUri = $"https://{ResourceUri}/_vti_bin/ExcelService.asmx";
+        private static readonly string ExcelServiceUri = $"{ResourceUri}/_vti_bin/ExcelService.asmx";
 
-        private static readonly string FilePath = $"https://{ResourceUri}/Shared%20Documents/Book.xlsx";
+        private static readonly string FilePath = $"{ResourceUri}/Shared%20Documents/Book.xlsx";
 
         private static readonly DateTime ExpiresOnBase = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
@@ -62,7 +62,7 @@ namespace Karamem0.Samples.SharePoint.ExcelServiceOnline {
                 Settings.Default.ExpiresOn = expiresOn;
                 Settings.Default.Save();
             }
-            WriteCellValue();
+            Console.WriteLine(ReadCellValue());
             Console.ReadLine();
         }
 
@@ -107,14 +107,16 @@ namespace Karamem0.Samples.SharePoint.ExcelServiceOnline {
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
         }
 
-        private static void WriteCellValue() {
+        private static string ReadCellValue() {
+            var cellValue = default(object);
             using (var client = new ExcelServiceSoapClient()) {
-                client.Endpoint.EndpointBehaviors.Add(new BearerEndpointBehavior(Settings.Default.AccessToken));
+                client.Endpoint.EndpointBehaviors.Add(new BearerEndpointBehavior());
                 var status = default(Status[]);
                 var sessionId = client.OpenWorkbook(FilePath, "", "", out status);
-                var cell = client.GetCellA1(sessionId, "Sheet1", "A1", false, out status);
+                cellValue = client.GetCellA1(sessionId, "Sheet1", "A1", false, out status);
                 client.CloseWorkbook(sessionId);
             }
+            return cellValue.ToString();
         }
 
     }
