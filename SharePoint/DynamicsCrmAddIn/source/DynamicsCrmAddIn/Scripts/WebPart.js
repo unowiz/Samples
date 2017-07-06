@@ -1,6 +1,6 @@
-var clientId = "5ed9aa3b-6563-40a5-a2ae-5436767c2099";
-var authUrl = "https://login.windows.net/common/oauth2/authorize";
-var resource = "https://karamem0test01.crm7.dynamics.com";
+var clientId = "<clientid>";
+var authUrl = "https://login.microsoftonline.com/common/oauth2/authorize";
+var resource = "https://<tenantname>.crm7.dynamics.com";
 var redirectUrl = window.location.href.split("?")[0];
 
 (function () {
