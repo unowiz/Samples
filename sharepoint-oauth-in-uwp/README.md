@@ -1,4 +1,4 @@
-﻿# oauth-in-uwp
+﻿# sharepoint-oauth-in-uwp
 
 UWP から SharePoint Online の REST API を実行するサンプルです。
 

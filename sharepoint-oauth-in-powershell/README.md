@@ -1,4 +1,4 @@
-﻿# oauth-in-powershell
+﻿# sharepoint-oauth-in-powershell
 
 OAuth を使用して SharePoint REST API を PowerShell から実行するサンプルです。
 

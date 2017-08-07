@@ -1,6 +1,8 @@
-﻿# ConsoleRestApi
+﻿# sharepoint-oauth-in-console
 
 コンソール アプリケーションから SharePoint Online の REST API を実行するサンプルです。
+
+[SharePoint Online の REST API を対話なしで実行する](http://blog.karamem0.jp/entry/2016/05/19/080000)
 
 ## 実行方法
 
