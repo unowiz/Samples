@@ -1,0 +1,13 @@
+{
+    "entries": [
+        {
+            "entry": "./lib/webparts/sharePointAddIn1/SharePointAddIn1WebPart.js",
+            "manifest": "./src/webparts/sharePointAddIn1/SharePointAddIn1WebPart.manifest.json",
+            "outputPath": "./dist/SharePointAddIn1.bundle.js"
+        }
+    ],
+    "externals": {},
+    "localizedResources": {
+        "sharePointAddIn1Strings": "webparts/SharePointAddIn1/loc/{locale}.js"
+    }
+}
