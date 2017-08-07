@@ -1,4 +1,4 @@
-﻿# linq-to-sharepoint
+﻿# sharepoint-linq-to-sharepoint
 
 LINQ to SharePoint のサンプルです。
 

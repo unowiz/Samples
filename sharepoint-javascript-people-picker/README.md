@@ -1,4 +1,4 @@
-﻿# sharepoint-people-picker
+﻿# sharepoint-javascript-people-picker
 
 JavaScript だけでダイアログを表示してユーザー選択をさせるサンプルです。
 
