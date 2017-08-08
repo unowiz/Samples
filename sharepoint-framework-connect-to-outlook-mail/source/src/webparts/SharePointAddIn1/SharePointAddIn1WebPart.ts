@@ -8,46 +8,28 @@ import {
 import styles from './SharePointAddIn1.module.scss';
 import * as strings from 'sharePointAddIn1Strings';
 import { ISharePointAddIn1WebPartProps } from './ISharePointAddIn1WebPartProps';
+import { SharePointAddIn1UserProps } from './SharePointAddIn1UserProps';
 
 export default class SharePointAddIn1WebPart extends BaseClientSideWebPart<ISharePointAddIn1WebPartProps> {
 
+    private userProperties: SharePointAddIn1UserProps;
+
     public render(): void {
-        this.domElement.innerHTML = `
-            <div class="${styles.container}">
-            </div>`;
-    }
-
-    protected renderContent(): void {
-        var container = this.domElement.getElementsByClassName(styles.container);
-        var requestUrl = this.properties.resourceUrl + "/api/v2.0/me/mailfolders";  
-        fetch(requestUrl, {
-            method: "GET",
-            headers: new Headers({
-                "Accept": "application/json",
-                "Authorization": `Bearer ${this.properties.accessToken}`
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                var items = data.value;
-                for (var index = 0; index < items.length; index++) {
-                    var displayName = items[index].DisplayName;
-                    var unreadItemCount = items[index].UnreadItemCount;
-                    container[0].innerHTML += `<div>${displayName}: ${unreadItemCount}</div>`;
-                }
-            });
-    }
-
-    protected onInit(): Promise<void> {
+        this.userProperties = new SharePointAddIn1UserProps(this.context.instanceId);
         if (window.location.hash == "") {
-            if (this.properties.accessToken == null) {
+            var loginName = this.context.pageContext.user.loginName;
+            if (this.userProperties.loginName != loginName) {
+                this.userProperties.clear();
+                this.userProperties.loginName = loginName;
+            }
+            if (this.userProperties.accessToken == null) {
                 var redirectUrl = window.location.href.split("?")[0];
                 var requestUrl = this.properties.authUrl + "?" +
                     "response_type=token" + "&" +
                     "client_id=" + encodeURI(this.properties.appId) + "&" +
                     "resource=" + encodeURI(this.properties.resourceUrl) + "&" +
                     "redirect_uri=" + encodeURI(redirectUrl);
-                var popupWindow = window.open(requestUrl);
+                var popupWindow = window.open(requestUrl, this.context.instanceId, "width=600px,height=400px");
                 var handle = setInterval((self) => {
                     if (popupWindow == null || popupWindow.closed == null || popupWindow.closed == true) {
                         clearInterval(handle);
@@ -65,17 +47,45 @@ export default class SharePointAddIn1WebPart extends BaseClientSideWebPart<IShar
                                 var value = decodeURIComponent(pair[1]);
                                 query[key] = value;
                             }
-                            self.properties.accessToken = query["access_token"];
-                            self.properties.refreshToken = query["refresh_token"];
-                            self.renderContent();
+                            self.userProperties.accessToken = query["access_token"];
+                            self.userProperties.expiresIn = query["expires_in"];
+                            self._renderBody();
+                            self._renderContent();
                         }
                     } catch (e) { }
                 }, 1, this);
             } else {
-                this.renderContent();
+                this._renderBody();
+                this._renderContent();
             }
         }
-        return super.onInit();
+    }
+
+    private _renderBody(): void {
+        this.domElement.innerHTML = `
+            <div id="${this.context.manifest.id}" class="${styles.container}">
+            </div>`;
+    }
+
+    private _renderContent(): void {
+        var container = this.domElement.querySelector(`#${this.context.manifest.id}`);
+        var requestUrl = this.properties.resourceUrl + "/api/v2.0/me/mailfolders";
+        fetch(requestUrl, {
+            method: "GET",
+            headers: new Headers({
+                "Accept": "application/json",
+                "Authorization": `Bearer ${this.userProperties.accessToken}`
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                var items = data.value;
+                for (var index = 0; index < items.length; index++) {
+                    var displayName = items[index].DisplayName;
+                    var unreadItemCount = items[index].UnreadItemCount;
+                    container.innerHTML += `<div>${displayName}: ${unreadItemCount}</div>`;
+                }
+            });
     }
 
     protected get dataVersion(): Version {
