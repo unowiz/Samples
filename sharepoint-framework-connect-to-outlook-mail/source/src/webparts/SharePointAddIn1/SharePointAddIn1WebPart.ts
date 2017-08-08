@@ -4,7 +4,6 @@ import {
     IPropertyPaneConfiguration,
     PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
-import { escape } from '@microsoft/sp-lodash-subset';
 
 import styles from './SharePointAddIn1.module.scss';
 import * as strings from 'sharePointAddIn1Strings';
