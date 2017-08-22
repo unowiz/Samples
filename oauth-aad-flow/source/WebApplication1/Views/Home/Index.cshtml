@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <p><a href="@Url.Action("SigninV1", "AuthorizationCode")" class="btn btn-default btn-lg btn-block">Authorization Code Grant (v1 Endopoint)</a></p>
+        <p><a href="@Url.Action("SigninV2", "AuthorizationCode")" class="btn btn-default btn-lg btn-block">Authorization Code Grant (v2 Endopoint)</a></p>
+        <p><a href="javascript:signInV1()" class="btn btn-default btn-lg btn-block">Implicit Code Grant (v1 Endopoint)</a></p>
+        <p><a href="javascript:signInV2()" class="btn btn-default btn-lg btn-block">Implicit Code Grant (v2 Endopoint)</a></p>
+        <p><a href="@Url.Action("GetTokenV1", "ClientCredentials")" class="btn btn-default btn-lg btn-block">Client Credentials Grant (v1 Endopoint)</a></p>
+        <p><a href="@Url.Action("GetTokenV2", "ClientCredentials")" class="btn btn-default btn-lg btn-block">Client Credentials Grant (v2 Endopoint)</a></p>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var tenantName = "@WebApplication1.Properties.Settings.Default.TenantName";
+        var clientId = "@WebApplication1.Properties.Settings.Default.ClientId";
+        var resourceUri = "https://graph.microsoft.com";
+        var scope = "User.Read";
+        var redirectUri = window.location.href.split("?")[0];
+        function signInV1() {
+            window.location.replace(
+                "https://login.microsoftonline.com/" + tenantName + "/oauth2/authorize" + "?" +
+                "response_type=token" + "&" +
+                "client_id=" + encodeURI(clientId) + "&" +
+                "resource=" + encodeURI(resourceUri) + "&" +
+                "redirect_uri=" + encodeURI(redirectUri)
+            );
+        }
+        function signInV2() {
+            window.location.replace(
+                "https://login.microsoftonline.com/" + tenantName + "/oauth2/v2.0/authorize" + "?" +
+                "response_type=token" + "&" +
+                "client_id=" + encodeURI(clientId) + "&" +
+                "scope=" + encodeURI(resourceUri + "/" + scope) + "&" +
+                "redirect_uri=" + encodeURI(redirectUri)
+            );
+        }
+    </script>
+}
