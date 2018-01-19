@@ -1,0 +1,18 @@
+{
+    "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+    "version": "2.0",
+    "bundles": {
+        "sharepoint-framework-using-graph-http-client-web-part": {
+            "components": [
+                {
+                    "entrypoint": "./lib/webparts/sharepoint-framework-using-graph-http-client/SharePointFrameworkUsingGraphHttpClientWebPart.js",
+                    "manifest": "./src/webparts/sharepoint-framework-using-graph-http-client/SharePointFrameworkUsingGraphHttpClientWebPart.manifest.json"
+                }
+            ]
+        }
+    },
+    "externals": {},
+    "localizedResources": {
+        "SharePointFrameworkUsingGraphHttpClientWebPartStrings": "lib/webparts/sharepoint-framework-using-graph-http-client/loc/{locale}.js"
+    }
+}
