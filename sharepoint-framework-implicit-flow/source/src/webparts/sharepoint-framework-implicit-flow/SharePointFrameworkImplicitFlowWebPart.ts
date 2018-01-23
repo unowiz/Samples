@@ -5,6 +5,10 @@ import {
     PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
+import {
+    HttpClient,
+    HttpClientResponse
+} from '@microsoft/sp-http';
 
 import styles from './SharePointFrameworkImplicitFlowWebPart.module.scss';
 import * as strings from 'SharePointFrameworkImplicitFlowWebPartStrings';
@@ -20,12 +24,12 @@ export default class SharePointFrameworkImplicitFlowWebPart extends BaseClientSi
     public render(): void {
         if (window.location.hash == "") {
             var redirectUrl = window.location.href.split("?")[0];
-            var requestUrl = this.properties.authUrl + "?" +
+            var authUrl = this.properties.authUrl + "?" +
                 "response_type=token" + "&" +
                 "client_id=" + encodeURI(this.properties.appId) + "&" +
                 "resource=" + encodeURI(this.properties.resourceUrl) + "&" +
                 "redirect_uri=" + encodeURI(redirectUrl);
-            var popupWindow = window.open(requestUrl, this.context.instanceId, "width=800px,height=600px");
+            var popupWindow = window.open(authUrl, this.context.instanceId, "width=800px,height=600px");
             var handle = setInterval((self: any) => {
                 if (popupWindow == null || popupWindow.closed == null || popupWindow.closed == true) {
                     clearInterval(handle);
@@ -48,14 +52,13 @@ export default class SharePointFrameworkImplicitFlowWebPart extends BaseClientSi
                         }
                         var accessToken = query["access_token"];
                         var requestUrl = this.properties.resourceUrl + "/me?api-version=1.6";
-                        fetch(requestUrl, {
-                            method: "GET",
+                        this.context.httpClient.get(requestUrl, HttpClient.configurations.v1, {
                             headers: new Headers({
                                 "Accept": "application/json",
                                 "Authorization": `Bearer ${accessToken}`
                             })
                         })
-                            .then((response: any) => {
+                            .then((response: HttpClientResponse) => {
                                 if (response.ok) {
                                     return response.json();
                                 } else {
