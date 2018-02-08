@@ -1,13 +1,13 @@
 {
     "entries": [
         {
-            "entry": "./lib/webparts/sharePointAddIn1/SharePointAddIn1WebPart.js",
-            "manifest": "./src/webparts/sharePointAddIn1/SharePointAddIn1WebPart.manifest.json",
-            "outputPath": "./dist/SharePointAddIn1.bundle.js"
+            "entry": "./lib/webparts/sharepoint-framework-connect-to-outlook-mail/SharePointFrameworkConnectToOutlookMailWebPart.js",
+            "manifest": "./src/webparts/sharepoint-framework-connect-to-outlook-mail/SharePointFrameworkConnectToOutlookMailWebPart.manifest.json",
+            "outputPath": "./dist/sharepoint-framework-connect-to-outlook-mail.bundle.js"
         }
     ],
     "externals": {},
     "localizedResources": {
-        "sharePointAddIn1Strings": "webparts/SharePointAddIn1/loc/{locale}.js"
+        "SharePointFrameworkConnectToOutlookMailStrings": "webparts/sharepoint-framework-connect-to-outlook-mail/loc/{locale}.js"
     }
 }

@@ -1,4 +1,4 @@
-﻿export class SharePointAddIn1UserProps {
+﻿export class SharePointFrameworkConnectToOutlookMailUserProps {
 
     private instanceId: string;
 

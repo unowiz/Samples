@@ -1,12 +1,10 @@
 {
     "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/client-side-component-manifest.schema.json",
-
     "id": "d856547f-067a-4e1c-884b-e3e72aab3294",
-    "alias": "SharePointAddIn1WebPart",
+    "alias": "SharePointFrameworkConnectToOutlookMail",
     "componentType": "WebPart",
     "version": "*", // The "*" signifies that the version should be taken from the package.json
     "manifestVersion": 2,
-
     /**
      * This property should only be set to true if it is certain that the webpart does not
      * allow arbitrary scripts to be called
@@ -19,14 +17,14 @@
                 "default": "Under Development"
             },
             "title": {
-                "default": "SharePointAddIn1"
+                "default": "SharePointFrameworkConnectToOutlookMail"
             },
             "description": {
-                "default": "SharePointAddIn1"
+                "default": "SharePointFrameworkConnectToOutlookMail"
             },
             "officeFabricIconFontName": "Page",
             "properties": {
-                "appId": "<appid>",
+                "appId": "<!-- App ID -->",
                 "authUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
                 "resourceUrl": "https://outlook.office.com"
             }

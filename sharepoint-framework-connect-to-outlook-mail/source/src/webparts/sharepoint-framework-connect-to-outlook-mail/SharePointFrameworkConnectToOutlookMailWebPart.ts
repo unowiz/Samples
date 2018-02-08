@@ -5,17 +5,17 @@ import {
     PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
 
-import styles from './SharePointAddIn1.module.scss';
-import * as strings from 'sharePointAddIn1Strings';
-import { ISharePointAddIn1WebPartProps } from './ISharePointAddIn1WebPartProps';
-import { SharePointAddIn1UserProps } from './SharePointAddIn1UserProps';
+import styles from './SharePointFrameworkConnectToOutlookMail.module.scss';
+import * as strings from 'SharePointFrameworkConnectToOutlookMailStrings';
+import { ISharePointFrameworkConnectToOutlookMailWebPartProps } from './ISharePointFrameworkConnectToOutlookMailWebPartProps';
+import { SharePointFrameworkConnectToOutlookMailUserProps } from './SharePointFrameworkConnectToOutlookMailUserProps';
 
-export default class SharePointAddIn1WebPart extends BaseClientSideWebPart<ISharePointAddIn1WebPartProps> {
+export default class SharePointFrameworkConnectToOutlookMailWebPart extends BaseClientSideWebPart<ISharePointFrameworkConnectToOutlookMailWebPartProps> {
 
-    private userProperties: SharePointAddIn1UserProps;
+    private userProperties: SharePointFrameworkConnectToOutlookMailUserProps;
 
     public render(): void {
-        this.userProperties = new SharePointAddIn1UserProps(this.context.instanceId);
+        this.userProperties = new SharePointFrameworkConnectToOutlookMailUserProps(this.context.instanceId);
         if (window.location.hash == "") {
             var loginName = this.context.pageContext.user.loginName;
             if (this.userProperties.loginName != loginName) {
@@ -52,7 +52,9 @@ export default class SharePointAddIn1WebPart extends BaseClientSideWebPart<IShar
                             self._renderBody();
                             self._renderContent();
                         }
-                    } catch (e) { }
+                    } catch (e) {
+                        console.error(e);
+                    }
                 }, 1, this);
             } else {
                 this._renderBody();
@@ -63,7 +65,9 @@ export default class SharePointAddIn1WebPart extends BaseClientSideWebPart<IShar
 
     private _renderBody(): void {
         this.domElement.innerHTML = `
-            <div id="${this.context.manifest.id}" class="${styles.container}">
+            <div class="${styles.sharepointframeworkconnecttooutlookmail}">
+                <div id="${this.context.manifest.id}" class="${styles.container}">
+                </div>
             </div>`;
     }
 
